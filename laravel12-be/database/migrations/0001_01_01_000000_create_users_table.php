@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->enum('auth_provider',['facebook','google','twitter','instagram','credentials']);
-            $table->string('auth_provider_id')->index()->nullable();
+            $table->enum('auth_provider', ['facebook', 'google', 'twitter', 'instagram', 'credentials']);
+            $table->string('auth_provider_id')->index("idx_users_auth_provider_id")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

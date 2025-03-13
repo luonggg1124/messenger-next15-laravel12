@@ -5,8 +5,6 @@ services:
     image: redis:7.4.2
     container_name: redis
     restart: always
-    environment:
-      - REDIS_HOSTS=local:redis
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -23,6 +21,8 @@ services:
     hostname: redis-commander
     image: rediscommander/redis-commander:latest
     restart: always
+    environment:
+      - REDIS_HOSTS=local:redis
     ports:
       - "8082:8081"
     networks:
@@ -39,13 +39,13 @@ services:
       timeout: 5s
       retries: 5
     environment:
-      - POSTGRES_DB=messenger_app
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./database/postgres.sql:/docker-entrypoint-initdb.d/postgres.sql
     networks:
       - app-network
 
