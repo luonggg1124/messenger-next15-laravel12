@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Input } from "../ui/input";
 
 import Menu from "./components/Menu";
-import Account from "./components/Account";
+import AccountBar from "./components/Account";
 
 export default function Header() {
   return (
@@ -23,7 +23,7 @@ export default function Header() {
         </div>
       </div>
       <Menu />
-      <Account className="h-full" />
+      <AccountBar className="h-full" />
     </header>
   );
 }

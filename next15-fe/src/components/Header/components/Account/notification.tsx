@@ -1,4 +1,6 @@
-import { Ellipsis } from "lucide-react";
+import { truncateText } from "@/utils/string";
+import { Bell, Ellipsis } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 type Props = {
   setVisible: any;
@@ -62,6 +64,44 @@ const Notification = ({ setVisible }: Props) => {
                 {item.label}
               </button>
             ))}
+          </div>
+          <div>
+            <div className="flex justify-between items-center">
+              <h4>Earlier</h4>
+              <button className="text-sm hover:bg-gray-100 cursor-pointer text-blue-500 p-2 rounded">
+                See all
+              </button>
+            </div>
+            <div>
+              {
+                [1,2,3,4,5,6,7,8,9,10].map((key) =>  <div key={key} className="hover:bg-gray-100 cursor-pointer box-border  rounded-lg flex items-center space-x-2 px-2 py-1">
+                <div className="relative w-[20%]">
+                  <Image
+                    src="/loid.jpg"
+                    className="rounded-full"
+                    width={56}
+                    height={56}
+                    alt="img"
+                  />
+                  <div className="absolute right-1 top-9 w-[24px] h-[24px] p-1 rounded-full flex items-center justify-center bg-slate-500 text-white">
+                    <Bell />
+                  </div>
+                </div>
+                <div className="w-[70%]">
+                  <p className="text-sm">
+                    <span className="font-bold ">Luong Nguyen</span>:{" "}
+                    {truncateText(
+                      "hi i am luong you can call me louis.it's my english name. I am twenty one years old.I live in Hanoi",
+                      80
+                    )}
+                  </p>
+                  <span className="text-[12px]">1d</span>
+                </div>
+                <div className="w-[10px] h-[10px] rounded-full bg-blue-700"></div>
+              </div>)
+              }
+             <button className="text-center w-full bg-gray-200 cursor-pointer hover:bg-gray-300 py-2 rounded-lg mt-2">See previous notifications</button>
+            </div>
           </div>
         </div>
       </div>

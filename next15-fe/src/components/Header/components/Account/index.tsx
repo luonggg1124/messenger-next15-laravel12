@@ -6,11 +6,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Bell, Logs, LucideIcon } from "lucide-react";
+import { Bell, ChevronDown, Logs, LucideIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import Menu from "./menu";
 import Notification from "./notification";
+import Account from "./account";
 type Props = {
   className?: string;
 };
@@ -31,7 +32,7 @@ const listItem: Item[] = [
     href: "notification",
   },
 ];
-const Account = ({ className }: Props) => {
+const AccountBar = ({ className }: Props) => {
   const [focusItem, setFocusItem] = useState<string | null>(null);
   return (
     <div className={className}>
@@ -60,23 +61,26 @@ const Account = ({ className }: Props) => {
         ))}
         {focusItem === "menu" ? <Menu setVisible={setFocusItem} /> : ""}
         {focusItem === "notification" ? <Notification setVisible={setFocusItem} /> : ""}
+        {focusItem === "account" ? <Account setVisible={setFocusItem} /> : ""}
         {/* Avatar */}
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="rounded-full overflow-hidden w-[40px] h-[40px] bg-slate-200 flex justify-center items-center">
-                <Image src="/tas.jpg" width={40} height={40} alt="Avatar" />
-              </div>
+              <button onClick={() => setFocusItem("account")} className="relative  w-[40px] h-[40px]  flex justify-center items-center">
+                <Image src="/tas.jpg" width={40} className="rounded-full" height={40} alt="Avatar" />
+                <div className="absolute -bottom-1 -right-1 size-4 rounded-full border-white border-2 bg-gray-200 flex items-center justify-center"><ChevronDown /></div>
+              </button>
             </TooltipTrigger>
             <TooltipContent>
               <p>Account</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
+        
       </div>
       
     </div>
   );
 };
 
-export default Account;
+export default AccountBar;
